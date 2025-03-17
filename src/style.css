@@ -1,0 +1,24 @@
+.container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    flex-direction: column;
+}
+
+body{
+    margin: 0px;
+    padding: 3%;
+    box-sizing: border-box;
+}
+
+header{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font: 35px;
+    height: 60px;
+    width: 100%;
+    background-color: gold;
+    color: white;
+}
