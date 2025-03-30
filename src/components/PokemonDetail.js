@@ -1,6 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import { Radar } from 'react-chartjs-2';
+import { Chart as ChartJS, RadialLinearScale, PointElement, LineElement, Title, Tooltip, Legend, RadarController } from 'chart.js';
 import '../style.css';
+
+// Registrar os componentes necessários para o gráfico Radar
+ChartJS.register(RadialLinearScale, PointElement, LineElement, Title, Tooltip, Legend, RadarController);
 
 function PokemonDetail() {
   const [pokemon, setPokemon] = useState(null);
@@ -41,15 +46,37 @@ function PokemonDetail() {
     return moves.slice(0, 5).map(move => move.move.name).join(', '); // Limita a 5 movimentos
   };
 
+  // Preparando os dados para o gráfico Radar
+  const chartData = {
+    labels: ['HP', 'Ataque', 'Defesa', 'Ataque Especial', 'Defesa Especial', 'Velocidade'],
+    datasets: [
+      {
+        label: `${pokemon.name} - Estatísticas`,
+        data: pokemon.stats.map(stat => stat.base_stat),
+        backgroundColor: 'rgba(255, 99, 132, 0.2)',
+        borderColor: 'rgba(255, 99, 132, 1)',
+        borderWidth: 1,
+      },
+    ],
+  };
+
   return (
     <div className="pokemon-detail">
       <div className='pokemon-header-PokemonDetail'>
         <h1>{pokemon.name}</h1>
       </div>
       <div className="pokemon-container">
-        <div className="pokemon-image">
-          <img src={pokemon.sprites.front_default} alt={pokemon.name} />
+        <div className="pokemon-cantainer-img-chart">
+          <div className="pokemon-image">
+            <img src={pokemon.sprites.front_default} alt={pokemon.name} />
+          </div>
+
+          {/* Adicionando o gráfico Radar */}
+          <div className="pokemon-stats-chart">
+            <Radar data={chartData} />
+          </div>
         </div>
+
         <div className="pokemon-description">
           <h2>Detalhes do Pokémon</h2>
           <div><strong>Tipo(s):</strong> {pokemon.types.map(t => t.type.name).join(', ')}</div>
