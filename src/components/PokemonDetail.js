@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import { Radar } from 'react-chartjs-2';
-import { Chart as ChartJS, RadialLinearScale, PointElement, LineElement, Title, Tooltip, Legend, RadarController } from 'chart.js';
+import { Chart as ChartJS, RadialLinearScale, PointElement, LineElement, Title, Tooltip, Legend } from 'chart.js';
 import '../style.css';
 
-// Registrar os componentes necessários para o gráfico Radar
-ChartJS.register(RadialLinearScale, PointElement, LineElement, Title, Tooltip, Legend, RadarController);
+ChartJS.register(RadialLinearScale, PointElement, LineElement, Title, Tooltip, Legend);
 
 function PokemonDetail() {
   const [pokemon, setPokemon] = useState(null);
-  const { id } = useParams(); // Pegando o ID da URL
+  const [evolutionChain, setEvolutionChain] = useState([]);
+  const { id } = useParams();
 
   useEffect(() => {
     async function loadPokemonDetails() {
@@ -21,32 +21,46 @@ function PokemonDetail() {
         console.error("Erro ao carregar os detalhes do Pokémon", error);
       }
     }
-    
+
     loadPokemonDetails();
   }, [id]);
 
+  useEffect(() => {
+    async function loadEvolutionChain() {
+      if (!pokemon) return;
+
+      try {
+        const speciesResponse = await fetch(pokemon.species.url);
+        const speciesData = await speciesResponse.json();
+        const evolutionResponse = await fetch(speciesData.evolution_chain.url);
+        const evolutionData = await evolutionResponse.json();
+
+        const chain = [];
+        let current = evolutionData.chain;
+
+        while (current) {
+          const pokeId = current.species.url.split('/').slice(-2, -1)[0]; // Pegando o ID do Pokémon
+          const pokeResponse = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokeId}`);
+          const pokeData = await pokeResponse.json();
+          chain.push({
+            name: current.species.name,
+            id: pokeId,
+            types: pokeData.types.map(t => t.type.name),
+          });
+          current = current.evolves_to.length > 0 ? current.evolves_to[0] : null;
+        }
+
+        setEvolutionChain(chain);
+      } catch (error) {
+        console.error("Erro ao carregar a cadeia de evolução", error);
+      }
+    }
+
+    loadEvolutionChain();
+  }, [pokemon]);
+
   if (!pokemon) return <p>Carregando...</p>;
 
-  // Função para formatar as habilidades
-  const formatAbilities = (abilities) => {
-    return abilities.map(a => a.ability.name).join(', ');
-  };
-
-  // Função para formatar as estatísticas
-  const formatStats = (stats) => {
-    return stats.map(stat => (
-      <div key={stat.stat.name}>
-        {stat.stat.name}: {stat.base_stat}
-      </div>
-    ));
-  };
-
-  // Função para formatar os movimentos
-  const formatMoves = (moves) => {
-    return moves.slice(0, 5).map(move => move.move.name).join(', '); // Limita a 5 movimentos
-  };
-
-  // Preparando os dados para o gráfico Radar
   const chartData = {
     labels: ['HP', 'Ataque', 'Defesa', 'Ataque Especial', 'Defesa Especial', 'Velocidade'],
     datasets: [
@@ -60,6 +74,14 @@ function PokemonDetail() {
     ],
   };
 
+  // Função para obter a classe de tipo do Pokémon
+  function getPokemonClass(types) {
+    if (types.length > 0) {
+      return `pokemon-${types[0]}`; // Usa o primeiro tipo como classe
+    }
+    return 'pokemon-normal'; // Classe padrão caso não tenha tipo definido
+  }
+
   return (
     <div className="pokemon-detail">
       <div className='pokemon-header-PokemonDetail'>
@@ -71,7 +93,6 @@ function PokemonDetail() {
             <img src={pokemon.sprites.front_default} alt={pokemon.name} />
           </div>
 
-          {/* Adicionando o gráfico Radar */}
           <div className="pokemon-stats-chart">
             <Radar data={chartData} />
           </div>
@@ -85,18 +106,34 @@ function PokemonDetail() {
           <div><strong>Altura:</strong> {pokemon.height / 10} m</div>
 
           <h3>Habilidades</h3>
-          <div>{formatAbilities(pokemon.abilities)}</div>
+          <div>{pokemon.abilities.map(a => a.ability.name).join(', ')}</div>
 
           <h3>Estatísticas</h3>
-          <div>{formatStats(pokemon.stats)}</div>
+          {pokemon.stats.map(stat => (
+            <div key={stat.stat.name}>{stat.stat.name}: {stat.base_stat}</div>
+          ))}
 
           <h3>Movimentos</h3>
-          <div>{formatMoves(pokemon.moves)}</div>
+          <div>{pokemon.moves.slice(0, 5).map(move => move.move.name).join(', ')}</div>
 
           <div className="pokemon-description-text">
             <h3>Sobre {pokemon.name}</h3>
-            <p>{pokemon.name} é um Pokémon de tipo {pokemon.types[0].type.name}, conhecido por sua velocidade e poder de ataque. Com suas habilidades únicas, ele pode se destacar em diferentes tipos de batalhas. Se você estiver em uma luta contra adversários do tipo {pokemon.types[0].type.name}, {pokemon.name} tem uma vantagem significativa, mas precisa tomar cuidado com Pokémons do tipo {pokemon.types.length > 1 ? pokemon.types[1].type.name : 'desconhecido'}. Preparar-se é a chave para uma vitória rápida!</p>
+            <p>{pokemon.name} é um Pokémon do tipo {pokemon.types[0].type.name}, conhecido por sua velocidade e poder de ataque.</p>
           </div>
+        </div>
+      </div>
+      <div className='pokemon-arvore-evolucao'>
+        <h2>Árvore de Evolução</h2>
+        <div className='pokemon-arvore-evolucao-card'>
+          {evolutionChain.map((poke, index) => (
+            <Link key={index} to={`/pokemon/${poke.id}`} className={`evolution-item ${getPokemonClass(poke.types)}`}>
+              <img 
+                src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${poke.id}.png`} 
+                alt={poke.name} 
+              />
+              <p>{poke.name}</p>
+            </Link>
+          ))}
         </div>
       </div>
     </div>

@@ -11,6 +11,10 @@ const Header = () => {
         <img className="pokebola-header" src={pokeball} alt="Pokebola" />
         <strong>Pokedex</strong>
       </Link>
+
+      <Link to="/items" className="header-link-others">
+        <strong>Itens</strong>
+      </Link>
     </header>
   );
 }

@@ -28,13 +28,25 @@ header {
 /* Remove o estilo padrão de link (como o sublinhado) */
 .header-link {
     text-decoration: none;
-    width: 100%;
+    width: 20%;
     display: flex;
     justify-content: left;
     align-items: center;
     color: white;
 }
 
+.header-link-others{
+    text-decoration: none;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    background-color: #f3f3f3;
+    width: 100px;
+    border-radius: 5px;
+    color: #505050;
+}
 /* Filtros */
 .filters {
     margin: 10px 10px;
@@ -124,6 +136,60 @@ header {
     box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2); /* Cria o efeito de profundidade */
 }
 
+.pokemon-card img{
+    width: 150px;
+}
+
+.item-card {
+    background-color: #f3f3f3;
+    padding: 3%;
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin: 5px;
+    border-radius: 15px;
+    max-width: 250px; /* Garante que os cards não fiquem muito grandes */
+    transition: transform 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
+    max-width: 200px; /* Garante que os cards não fiquem muito grandes */
+    width: 100%;
+    text-decoration: none;
+    color: #505050;
+}
+
+.item-card:hover {
+    background: #e0e0e0; /* Cor mais forte ao passar o mouse */
+    transform: scale(1.1); /* Aumenta o tamanho */
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2); /* Cria o efeito de profundidade */
+}
+
+.item-card img{
+    width: 150px;
+}
+
+.evolution-item {
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 2%;
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin: 15px;
+    border-radius: 15px;
+    max-width: 300px; /* Garante que os cards não fiquem muito grandes */
+    max-height: 300px;
+    transition: transform 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
+    width: 100%;
+    text-decoration: none;
+}
+
+.evolution-item:hover {
+    background: #e0e0e0; /* Cor mais forte ao passar o mouse */
+    transform: scale(1.1); /* Aumenta o tamanho */
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2); /* Cria o efeito de profundidade */
+}
 .pokemon-list {
     background-color: white;
     display: flex;
@@ -134,6 +200,24 @@ header {
     width: 100%;
     max-width: 100%;
     box-sizing: border-box;
+}
+
+.item-list {
+    background-color: white;
+    display: flex;
+    flex-wrap: wrap; /* Permite quebra de linha */
+    justify-content: center;
+    gap: 10px;
+    padding: 10px;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+}
+
+.item-name {
+    font-weight: bold;
+    color: #505050;
+    font-size: 20px;
 }
 
 .pokemon-name {
@@ -229,6 +313,7 @@ header {
     gap: 50px; /* Espaço entre a imagem e o descritivo */
     align-items: flex-start;
     padding: 20px;
+    width: 100%;
   }
   
   /* Estilo da imagem do Pokémon */
@@ -242,12 +327,12 @@ header {
   
   /* Estilo da descrição do Pokémon */
   .pokemon-description {
-    max-width: 1000px;
     max-height: 1000px;
     object-fit: contain;
     padding: 3%;
     border-radius: 10px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 100%;
   }
   
   /* Estilo das informações do Pokémon */
@@ -295,4 +380,61 @@ header {
     max-height: 400px;
     width: 100%;
     height: 100%;
+  }
+
+  .pokemon-arvore-evolucao-card {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 20px;
+
+  }
+
+  .pokemon-arvore-evolucao {
+    width: 100%;
+    gap: 50px; /* Espaço entre a imagem e o descritivo */
+    padding: 20px;
+    width: 100%;
+  }
+
+  .evolution-item img {
+    width: 100%;
+    max-width: 150px;
+    height: auto;
+    border-radius: 10px;
+    margin-bottom: 10px;
+  }
+  
+  .evolution-item p {
+    font-size: 1rem;
+    font-weight: bold;
+    color: white;
+  }
+
+  .item-description {
+    flex: 2;
+    min-width: 200px;
+  }
+  
+  .item-description h2 {
+    font-size: 2em;
+    margin-bottom: 10px;
+  }
+  
+  .item-description div {
+    margin: 10px 0;
+    font-size: 1.1em;
+  }
+  
+  .item-description strong {
+    font-weight: bold;
+  }
+  
+  .item-description p {
+    font-size: 1.1em;
+    color: #555;
+    line-height: 1.6;
   }
