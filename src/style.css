@@ -16,7 +16,7 @@ html, body {
 
 header {
     display: flex;
-    justify-content: left;
+    justify-content: left; 
     align-items: center;
     font-size: 35px; /* Ajuste de tamanho correto */
     height: 60px;

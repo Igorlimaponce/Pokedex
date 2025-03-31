@@ -6,6 +6,7 @@ import PokemonDetail from './PokemonDetail';
 import App from './App';
 import ItemList from './ItemList';  // Importa a nova página de itens
 import ItemDetail from './ItemDetail';  // Página de detalhes do item (se você quiser implementar)
+import Login from './Login'
 
 function RouteConfig() {
   return (
@@ -16,6 +17,7 @@ function RouteConfig() {
         <Route path="/pokemon/:id" element={<PokemonDetail />} /> {/* Página de detalhes do Pokémon */}
         <Route path="/items" element={<ItemList />} />  {/* Nova página de itens */}
         <Route path="/item/:id" element={<ItemDetail />} />  {/* Página de detalhes do item (opcional) */}
+        <Route path="/login" element={<Login />} />  {/* Nova página de itens */}
       </Route>
     </Routes>
   );

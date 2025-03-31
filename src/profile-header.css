@@ -1,0 +1,65 @@
+
+  /* Ajuste para alinhar o ícone do perfil no final do header */
+  .profile-container {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    position: relative; /* Necessário para posicionar o menu */
+    margin-left: auto;
+    height: 60px;
+  }
+  
+  .profile-button {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    padding: 5px;
+    border-radius: 5px;
+    flex-direction: row;
+  }
+  
+  .profile-icon {
+    width: 40px;
+    height: 40px;
+  }
+  
+  .pokemon-icon {
+    width: 35px;
+    height: 35px;
+    margin-left: 10px;
+    background-color: #f1f1f1;
+    border-radius: 20px;
+    height: 60px;
+  }
+  
+  /* Posicionamento correto do dropdown */
+  .dropdown-menu {
+    position: absolute;
+    top: 50px;  /* Ajuste para ficar abaixo do perfil */
+    right: 0;
+    background: white;
+    border-radius: 5px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    z-index: 10;
+    min-width: 150px; /* Garante que o menu tenha tamanho adequado */
+  }
+  
+  .dropdown-menu p {
+    margin: 0;
+    padding: 5px;
+  }
+  
+  .dropdown-menu button {
+    width: 100%;
+    padding: 5px;
+    background: #ff4444;
+    color: white;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .dropdown-menu button:hover {
+    background: #cc0000;
+  }
+  
