@@ -24,28 +24,6 @@ CSS3 / Styled Components / TailwindCSS (especifique qual utilizou)
 API REST (PokeAPI)
 React Router (para navegação entre telas)
 Axios (para requisições, se usado)
-📦 Como executar o projeto
-
-Pré-requisitos
-Node.js instalado
-Gerenciador de pacotes (npm ou yarn)
-Instalação
-# Clone o repositório
-git clone https://github.com/seu-usuario/seu-repositorio.git
-
-# Acesse a pasta do projeto
-cd seu-repositorio
-
-# Instale as dependências
-npm install
-# ou
-yarn install
-Execução
-# Inicie o servidor de desenvolvimento
-npm run dev
-# ou
-yarn dev
-O app estará disponível em http://localhost:5173 (ou a porta que você configurar).
 
 🖼️ Funcionalidades
 
