@@ -20,10 +20,10 @@ O projeto busca uma experiência leve, moderna e fácil de navegar para fãs de 
 
 React.js
 JavaScript
-CSS3 / Styled Components / TailwindCSS (especifique qual utilizou)
+CSS3 / Styled Components /
 API REST (PokeAPI)
 React Router (para navegação entre telas)
-Axios (para requisições, se usado)
+Axios (para requisições)
 
 🖼️ Funcionalidades
 
@@ -41,22 +41,16 @@ Descrição: Fornece dados sobre todos os Pokémon, habilidades, tipos, etc.
 Link: https://pokeapi.co/
 📸 Demonstração
 
-Adicione imagens ou GIFs mostrando o funcionamento da aplicação.
-Exemplo:
+![image](https://github.com/user-attachments/assets/dbd48be8-8971-49be-a6a5-0eda8f3f4925)
 
-Página Inicial	Tela de Detalhamento
+Tela de Item
+![image](https://github.com/user-attachments/assets/2b5cab44-0088-43e0-b10c-165f043125fe)
+
 ✨ Melhorias futuras
 
  Favoritar Pokémon
  Tela de Login - Prioridade
  Adicionar animações de carregamento
-🤝 Contribuição
-
-Faça um fork do projeto
-Crie uma branch para sua feature (git checkout -b feature/nova-feature)
-Commit suas alterações (git commit -m 'feat: minha nova feature')
-Faça push para a branch (git push origin feature/nova-feature)
-Abra um Pull Request
 
 📩 Contato
 
